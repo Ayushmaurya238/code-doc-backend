@@ -1,0 +1,306 @@
+{
+  "Apple___Apple_scab": {
+    "name_of_species": "Apple",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Apple Scab",
+    "cause": "Caused by the fungus Venturia inaequalis, which thrives in cool, wet spring weather. It overwinters in infected leaves on the ground.",
+    "prevention": "Choose resistant apple varieties. Rake and destroy fallen leaves in autumn. Ensure good air circulation through proper pruning.",
+    "treatment": "Apply fungicides from the time of bud break until dry weather prevails. Common treatments include captan and sulfur-based fungicides."
+  },
+  "Apple___Black_rot": {
+    "name_of_species": "Apple",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Black Rot",
+    "cause": "Caused by the fungus Botryosphaeria obtusa. The fungus infects dead tissue first and then moves into healthy wood, leaves, and fruit.",
+    "prevention": "Prune out dead or cankered branches. Remove mummified fruit from the tree. Maintain tree health with proper watering and fertilization.",
+    "treatment": "Fungicide sprays used for apple scab can also help control black rot. Ensure thorough coverage."
+  },
+  "Apple___Cedar_apple_rust": {
+    "name_of_species": "Apple",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Cedar Apple Rust",
+    "cause": "Caused by the fungus Gymnosporangium juniperi-virginianae. It requires both an apple tree and a juniper/cedar tree to complete its life cycle.",
+    "prevention": "Remove nearby juniper and cedar trees if possible. Plant rust-resistant apple varieties. Apply preventative fungicides.",
+    "treatment": "Apply fungicides during the pink and petal-fall stages of apple blossom development. Myclobutanil and mancozeb are effective."
+  },
+  "Apple___healthy": {
+    "name_of_species": "Apple",
+    "diseased_or_healthy": "Healthy",
+    "disease_name": "None",
+    "cause": "N/A",
+    "prevention": "Maintain health with proper watering, balanced fertilization, and good air circulation through pruning.",
+    "treatment": "N/A"
+  },
+  "Blueberry___healthy": {
+    "name_of_species": "Blueberry",
+    "diseased_or_healthy": "Healthy",
+    "disease_name": "None",
+    "cause": "N/A",
+    "prevention": "Ensure acidic soil, consistent moisture, and use appropriate fertilizers for acid-loving plants.",
+    "treatment": "N/A"
+  },
+  "Cherry_(including_sour)_Powdery_mildew": {
+    "name_of_species": "Cherry",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Powdery Mildew",
+    "cause": "Caused by the fungus Podosphaera clandestina, which thrives in humid conditions and moderate temperatures.",
+    "prevention": "Ensure good air circulation by pruning. Avoid excessive nitrogen fertilizer. Plant in sunny locations.",
+    "treatment": "Apply fungicides such as sulfur, potassium bicarbonate, or horticultural oils at the first sign of disease."
+  },
+  "Cherry_(including_sour)_healthy": {
+    "name_of_species": "Cherry",
+    "diseased_or_healthy": "Healthy",
+    "disease_name": "None",
+    "cause": "N/A",
+    "prevention": "Protect from birds with netting. Ensure good drainage and consistent watering.",
+    "treatment": "N/A"
+  },
+  "Corn_(maize)_Cercospora_leaf_spot Gray_leaf_spot": {
+    "name_of_species": "Corn (Maize)",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Cercospora Leaf Spot / Gray Leaf Spot",
+    "cause": "Caused by the fungus Cercospora zeae-maydis. It survives in infected corn debris and thrives in warm, humid weather.",
+    "prevention": "Use resistant corn hybrids. Practice crop rotation with non-host crops. Use tillage to bury infected residue.",
+    "treatment": "Fungicide application can be effective if applied early, especially on susceptible hybrids in high-risk conditions."
+  },
+  "Corn_(maize)Common_rust": {
+    "name_of_species": "Corn (Maize)",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Common Rust",
+    "cause": "Caused by the fungus Puccinia sorghi, which is spread by wind and thrives in humid weather with moderate temperatures.",
+    "prevention": "Plant resistant hybrids. Most modern hybrids have good resistance.",
+    "treatment": "Fungicide application is usually not economically necessary for common rust but can be used in severe cases."
+  },
+  "Corn_(maize)_Northern_Leaf_Blight": {
+    "name_of_species": "Corn (Maize)",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Northern Leaf Blight",
+    "cause": "Caused by the fungus Exserohilum turcicum. Favored by high humidity and moderate temperatures.",
+    "prevention": "Plant resistant hybrids. Crop rotation and tillage are also effective at reducing inoculum.",
+    "treatment": "Fungicides can be effective, especially when applied at the first sign of disease on susceptible hybrids."
+  },
+  "Corn_(maize)_healthy": {
+    "name_of_species": "Corn (Maize)",
+    "diseased_or_healthy": "Healthy",
+    "disease_name": "None",
+    "cause": "N/A",
+    "prevention": "Ensure adequate nitrogen supply and proper soil moisture, especially during tasseling.",
+    "treatment": "N/A"
+  },
+  "Grape___Black_rot": {
+    "name_of_species": "Grape",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Black Rot",
+    "cause": "Caused by the fungus Guignardia bidwellii. It overwinters in mummified berries and cane lesions.",
+    "prevention": "Remove and destroy all mummified berries and infected canes during dormancy. Promote good air circulation.",
+    "treatment": "Apply fungicides on a regular schedule starting from early shoot growth until the berries begin to ripen. Mancozeb and myclobutanil are effective."
+  },
+  "Grape__Esca(Black_Measles)": {
+    "name_of_species": "Grape",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Esca (Black Measles)",
+    "cause": "A complex disease caused by a group of wood-infecting fungi. Infection often occurs through pruning wounds.",
+    "prevention": "Avoid pruning in the rain. Apply pruning wound protectants. Remove and destroy infected vines.",
+    "treatment": "There is no cure for Esca. Management focuses on surgical removal of infected parts of the vine and promoting overall plant health."
+  },
+  "Grape__Leaf_blight(Isariopsis_Leaf_Spot)": {
+    "name_of_species": "Grape",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Leaf Blight (Isariopsis Leaf Spot)",
+    "cause": "Caused by the fungus Pseudocercospora vitis. The disease is favored by warm, humid weather.",
+    "prevention": "Promote good air circulation through leaf pulling and canopy management. Destroy fallen leaves.",
+    "treatment": "Fungicides used for other grape diseases like black rot will also control leaf blight."
+  },
+  "Grape___healthy": {
+    "name_of_species": "Grape",
+    "diseased_or_healthy": "Healthy",
+    "disease_name": "None",
+    "cause": "N/A",
+    "prevention": "Use a proper trellis system. Prune annually during dormancy. Ensure good sun exposure and air movement.",
+    "treatment": "N/A"
+  },
+  "Orange__Haunglongbing(Citrus_greening)": {
+    "name_of_species": "Orange",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Haunglongbing (Citrus Greening)",
+    "cause": "Caused by a bacterium transmitted by the Asian citrus psyllid, an insect. It is one of the most destructive citrus diseases.",
+    "prevention": "Control psyllid populations with insecticides. Remove and destroy infected trees to reduce the spread. Use certified disease-free nursery stock.",
+    "treatment": "There is currently no cure for Citrus Greening. Management focuses on prevention and slowing the spread."
+  },
+  "Peach___Bacterial_spot": {
+    "name_of_species": "Peach",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Bacterial Spot",
+    "cause": "Caused by the bacterium Xanthomonas campestris pv. pruni. Favored by warm, wet weather.",
+    "prevention": "Plant resistant varieties. Avoid overhead irrigation. Maintain tree vigor with balanced fertilization.",
+    "treatment": "Copper-based bactericides can be used, but timing is critical. They should be applied late in the dormant season or after petal fall."
+  },
+  "Peach___healthy": {
+    "name_of_species": "Peach",
+    "diseased_or_healthy": "Healthy",
+    "disease_name": "None",
+    "cause": "N/A",
+    "prevention": "Prune in late winter to shape the tree and remove dead wood. Thin fruit to encourage larger, healthier peaches.",
+    "treatment": "N/A"
+  },
+  "Pepper,bell__Bacterial_spot": {
+    "name_of_species": "Bell Pepper",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Bacterial Spot",
+    "cause": "Caused by Xanthomonas bacteria. Spread by splashing water, tools, and hands. Thrives in warm, humid conditions.",
+    "prevention": "Use disease-free seeds and transplants. Rotate crops. Avoid working with plants when they are wet. Use mulch to reduce water splash.",
+    "treatment": "Copper-based bactericides can slow the spread but will not cure infected plants. Remove heavily infected plants."
+  },
+  "Pepper,bell__healthy": {
+    "name_of_species": "Bell Pepper",
+    "diseased_or_healthy": "Healthy",
+    "disease_name": "None",
+    "cause": "N/A",
+    "prevention": "Provide consistent moisture. Support plants with stakes or cages. Ensure well-drained soil rich in organic matter.",
+    "treatment": "N/A"
+  },
+  "Potato___Early_blight": {
+    "name_of_species": "Potato",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Early Blight",
+    "cause": "Caused by the fungus Alternaria solani. It survives in infected plant debris and soil.",
+    "prevention": "Use certified disease-free seed potatoes. Rotate crops. Ensure good nutrition to maintain plant vigor.",
+    "treatment": "Apply fungicides such as chlorothalonil or mancozeb on a preventative schedule, especially during periods of high humidity."
+  },
+  "Potato___Late_blight": {
+    "name_of_species": "Potato",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Late Blight",
+    "cause": "Caused by the oomycete Phytophthora infestans. It is highly destructive and spreads rapidly in cool, moist conditions.",
+    "prevention": "Use certified disease-free seed. Destroy volunteer potato plants. Allow for good air circulation. Apply preventative fungicides.",
+    "treatment": "At the first sign of disease, apply targeted fungicides and shorten the spray interval. Destroy infected foliage before harvesting to prevent tuber infection."
+  },
+  "Potato___healthy": {
+    "name_of_species": "Potato",
+    "diseased_or_healthy": "Healthy",
+    "disease_name": "None",
+    "cause": "N/A",
+    "prevention": "'Hill' the soil around the plants to protect developing tubers from sunlight and pests.",
+    "treatment": "N/A"
+  },
+  "Raspberry___healthy": {
+    "name_of_species": "Raspberry",
+    "diseased_or_healthy": "Healthy",
+    "disease_name": "None",
+    "cause": "N/A",
+    "prevention": "Prune canes after fruiting. Use a trellis to support canes and improve air circulation.",
+    "treatment": "N/A"
+  },
+  "Soybean___healthy": {
+    "name_of_species": "Soybean",
+    "diseased_or_healthy": "Healthy",
+    "disease_name": "None",
+    "cause": "N/A",
+    "prevention": "Ensure proper planting depth and spacing. Use crop rotation to manage soil-borne diseases.",
+    "treatment": "N/A"
+  },
+  "Squash___Powdery_mildew": {
+    "name_of_species": "Squash",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Powdery Mildew",
+    "cause": "Caused by several different species of fungi. Thrives in both high humidity and dry conditions.",
+    "prevention": "Plant resistant varieties. Ensure good air circulation and sun exposure. Avoid overhead watering.",
+    "treatment": "Apply horticultural oils, sulfur, or potassium bicarbonate at the first sign of disease. Many commercial fungicides are also available."
+  },
+  "Strawberry___Leaf_scorch": {
+    "name_of_species": "Strawberry",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Leaf Scorch",
+    "cause": "Caused by the fungus Diplocarpon earlianum. Favored by wet conditions.",
+    "prevention": "Plant in well-drained soil. Use mulch to keep leaves dry. Remove old, infected leaves after harvest.",
+    "treatment": "Apply fungicides during periods of rapid leaf growth in the spring. Captan is a common option."
+  },
+  "Strawberry___healthy": {
+    "name_of_species": "Strawberry",
+    "diseased_or_healthy": "Healthy",
+    "disease_name": "None",
+    "cause": "N/A",
+    "prevention": "Renovate beds after harvest. Protect from frost during flowering. Use straw mulch to keep fruit clean.",
+    "treatment": "N/A"
+  },
+  "Tomato___Bacterial_spot": {
+    "name_of_species": "Tomato",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Bacterial Spot",
+    "cause": "Caused by Xanthomonas bacteria. Spreads in warm, wet conditions and can be introduced via infected seed.",
+    "prevention": "Use disease-free seed. Rotate crops. Mulch plants to reduce water splashing. Avoid overhead irrigation.",
+    "treatment": "Copper-based sprays can help limit the spread but will not cure the plant. Remove infected leaves."
+  },
+  "Tomato___Early_blight": {
+    "name_of_species": "Tomato",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Early Blight",
+    "cause": "Caused by the fungus Alternaria solani. It often affects the lower, older leaves first and is favored by humidity.",
+    "prevention": "Ensure good air circulation. Mulch heavily. Water at the base of the plant. Rotate crops.",
+    "treatment": "Prune off infected lower leaves. Apply fungicides containing chlorothalonil or mancozeb as a preventative measure."
+  },
+  "Tomato___Late_blight": {
+    "name_of_species": "Tomato",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Late Blight",
+    "cause": "Caused by the oomycete Phytophthora infestans. It is highly destructive and spreads rapidly in cool, moist conditions.",
+    "prevention": "Use resistant varieties. Allow for ample spacing between plants. Water soil, not leaves. Monitor local disease forecasts.",
+    "treatment": "Remove and destroy infected plants immediately. Preventative fungicide application is key. Copper fungicides and chlorothalonil are common treatments."
+  },
+  "Tomato___Leaf_Mold": {
+    "name_of_species": "Tomato",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Leaf Mold",
+    "cause": "Caused by the fungus Passalora fulva. It is most common in greenhouses with high humidity and poor air circulation.",
+    "prevention": "Use resistant varieties. Ensure good ventilation and low humidity. Stake plants to improve air flow.",
+    "treatment": "Apply fungicides at the first sign of disease. Remove infected leaves and plant debris."
+  },
+  "Tomato___Septoria_leaf_spot": {
+    "name_of_species": "Tomato",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Septoria Leaf Spot",
+    "cause": "Caused by the fungus Septoria lycopersici. Spores are spread by splashing water.",
+    "prevention": "Water at the base of the plant. Use mulch. Rotate crops. Remove infected leaves promptly.",
+    "treatment": "Fungicides containing chlorothalonil or copper can be effective if applied early and regularly."
+  },
+  "Tomato___Spider_mites Two-spotted_spider_mite": {
+    "name_of_species": "Tomato",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Spider Mites",
+    "cause": "Infestation by tiny arachnids (Tetranychus urticae). They thrive in hot, dry conditions and feed on plant cells.",
+    "prevention": "Keep plants well-watered. Increase humidity. Regularly inspect the undersides of leaves.",
+    "treatment": "Spray plants with a strong jet of water to dislodge them. Apply insecticidal soap or horticultural oil. Introduce natural predators like ladybugs."
+  },
+  "Tomato___Target_Spot": {
+    "name_of_species": "Tomato",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Target Spot",
+    "cause": "Caused by the fungus Corynespora cassiicola. Thrives in high humidity and warm temperatures.",
+    "prevention": "Improve air circulation. Avoid overhead watering. Remove infected plant debris from the garden.",
+    "treatment": "Apply fungicides containing chlorothalonil or mancozeb. Prune affected leaves to slow the spread."
+  },
+  "Tomato___Tomato_Yellow_Leaf_Curl_Virus": {
+    "name_of_species": "Tomato",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Tomato Yellow Leaf Curl Virus",
+    "cause": "A virus transmitted by the silverleaf whitefly. It causes stunting, yellowing, and upward curling of leaves.",
+    "prevention": "Use resistant tomato varieties. Control whitefly populations using reflective mulch, insecticides, or insect netting.",
+    "treatment": "There is no cure for the virus. Infected plants should be removed and destroyed to prevent further spread by whiteflies."
+  },
+  "Tomato___Tomato_mosaic_virus": {
+    "name_of_species": "Tomato",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Tomato Mosaic Virus",
+    "cause": "A virus that can be spread mechanically by hands, tools, and contact between plants. It can persist in soil and on seeds.",
+    "prevention": "Wash hands thoroughly before handling plants. Use virus-resistant varieties. Do not use tobacco products near tomato plants.",
+    "treatment": "There is no cure. Infected plants should be removed and destroyed to prevent spread."
+  },
+  "Tomato___healthy": {
+    "name_of_species": "Tomato",
+    "diseased_or_healthy": "Healthy",
+    "disease_name": "None",
+    "cause": "N/A",
+    "prevention": "Provide support with stakes or cages. Ensure consistent watering and use a balanced fertilizer.",
+    "treatment": "N/A"
+  }
+}
