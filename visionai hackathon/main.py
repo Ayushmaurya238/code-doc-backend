@@ -113,12 +113,13 @@ async def predict(file: UploadFile = File(...)):
             print(f"Low confidence prediction ({confidence:.4f}). Returning 'Unidentified'.")
             return {
                 "predicted_class": "Unidentified",
-                "confidence": f"{confidence:.4f}",
+                "confidence": f"{0}",
                 "details": {
                     "status": "Unknown",
-                    "diseaseName": "Unidentified",
+                    "disease_name": "Unidentified",
                     "cause": "The model could not identify the disease with high confidence.",
-                    "treatment": "Please provide a clearer, well-lit photograph of the affected area. Ensure the leaf is the main subject and is in focus."
+                    "treatment": "Please provide a clearer, well-lit photograph of the affected area. Ensure the leaf is the main subject and is in focus.",
+                    "prevention":"N/A"
                 }
             }
         
@@ -128,10 +129,11 @@ async def predict(file: UploadFile = File(...)):
         # Handle cases where the predicted class is not in our JSON file
         if details is None:
             details = {
-                "status": "Diseased",
-                "diseaseName": pred_class.replace("_", " "),
+                "status": "Disease not detected",
+                "disease_name": pred_class.replace("_", " "),
                 "cause": "Information for this specific disease is not yet available in our database.",
                 "treatment": "General advice: Isolate the plant, remove affected leaves, and consult a local agricultural expert for further guidance."
+                
             }
         
         print(f"Predicted: {pred_class} with confidence {confidence:.4f}")
