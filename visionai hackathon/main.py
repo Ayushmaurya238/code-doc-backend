@@ -2,6 +2,7 @@ import uvicorn
 import json
 from pathlib import Path
 from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi.concurrency import run_in_threadpool
 from fastapi.middleware.cors import CORSMiddleware
 from fastai.vision.all import *
 import io
@@ -31,6 +32,7 @@ app.add_middleware(
 
 # --- 3. LOAD MODEL AND METADATA ON STARTUP ---
 
+# --- BUG FIX 1: Corrected model filename ---
 MODEL_PATH = Path("plant_disease_model_resnet34.pkl")
 DISEASE_INFO_PATH = Path("disease_info.json")
 
@@ -46,80 +48,63 @@ async def startup_event():
     
     # Load Disease Info
     if not DISEASE_INFO_PATH.exists():
-        raise FileNotFoundError(f"'{DISEASE_INFO_PATH}' not found. Please make sure the file is in the same directory.")
+        raise RuntimeError(f"Disease info file not found at {DISEASE_INFO_PATH}")
     with open(DISEASE_INFO_PATH) as f:
         disease_info = json.load(f)
-    print("Disease info loaded successfully.")
 
-    # --- FIX FOR WINDOWS USERS LOADING A LINUX-TRAINED MODEL---
-    temp_path_patch = None
-    if sys.platform == "win32":
-        temp_path_patch = pathlib.PosixPath
-        pathlib.PosixPath = pathlib.WindowsPath
-    # ---------------------------------------------------------
+    # Load Model
+    if not MODEL_PATH.exists():
+        raise RuntimeError(f"Model file not found at {MODEL_PATH}")
     
-    try:
-        # Load Fastai Learner Model
-        if not MODEL_PATH.exists():
-            raise FileNotFoundError(f"'{MODEL_PATH}' not found. Please place your exported .pkl model file in the same directory.")
-        
-        learn = load_learner(MODEL_PATH, cpu=True)
-        print("Fastai learner loaded successfully.")
+    # --- Platform-specific patch for Windows ---
+    if sys.platform == "win32":
+        pathlib.PosixPath = pathlib.WindowsPath
 
-    finally:
-        # --- IMPORTANT: Revert the patch after loading the model ---
-        if sys.platform == "win32" and temp_path_patch is not None:
-            pathlib.PosixPath = temp_path_patch
-        # ---------------------------------------------------------
+    try:
+        learn = load_learner(MODEL_PATH)
+        print("--- Model loaded successfully ---")
+    except Exception as e:
+        raise RuntimeError(f"Failed to load the model: {e}")
 
 
 # --- 4. DEFINE API ENDPOINTS ---
 
 @app.get("/")
-async def root():
-    """A simple root endpoint to confirm the API is running."""
-    return {"message": "Welcome to the Plant Disease Prediction API! Go to /docs for more info."}
+def read_root():
+    """Welcome message for the API."""
+    return {"message": "Welcome to the Plant Disease Detection API!"}
+
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     """
-    Receives an image file, predicts the disease, and returns detailed information.
+    Predict the disease from an uploaded image.
     """
-    if learn is None or disease_info is None:
-        raise HTTPException(status_code=503, detail="Server is not ready: Model or disease data is not loaded.")
+    if learn is None:
+        raise HTTPException(status_code=503, detail="Model is not loaded yet. Please try again in a moment.")
 
     try:
-        # Read image file bytes
+        # Read image file
         image_bytes = await file.read()
-        
-        # Create a PILImage from bytes
         img = PILImage.create(io.BytesIO(image_bytes))
 
-        # --- MORE ROBUST PREDICTION METHOD ---
-        # Create a dataloader with the single image to apply all necessary transforms
-        dl = learn.dls.test_dl([img])
+        # Perform prediction
+        pred_class, pred_idx, outputs = await run_in_threadpool(learn.predict, img)
         
-        # Get predictions
-        preds, _ = learn.get_preds(dl=dl)
-        
-        # The prediction is the index of the highest probability
-        pred_idx = preds[0].argmax().item()
-        pred_class = learn.dls.vocab[pred_idx]
-        confidence = float(preds[0][pred_idx])
-        # ------------------------------------
-        
-        # Check if confidence is below the threshold
-        if confidence < 0.70:
-            print(f"Low confidence prediction ({confidence:.4f}). Returning 'Unidentified'.")
+        confidence = outputs[pred_idx].item()
+        print(confidence)
+        # --- IMPROVEMENT: Handle low-confidence predictions ---
+        if confidence < 0.7:  # 50% threshold
             return {
-                "predicted_class": "Unidentified",
-                "confidence": f"{0}",
+                "predicted_class": "Uncertain",
+                "confidence": f"{confidence:.4f}",
                 "details": {
-                    "status": "Unknown",
-                    "disease_name": "Unidentified",
-                    "cause": "The model could not identify the disease with high confidence.",
-                    "treatment": "Please provide a clearer, well-lit photograph of the affected area. Ensure the leaf is the main subject and is in focus.",
-                    "prevention":"N/A"
+                    "name_of_species": "Unknown",
+                    "diseased_or_healthy": "Diseased",
+                    "disease_name": "Could not determine with high confidence.",
+                    "cause": "The model is uncertain about the prediction. This could be due to a poor quality image or an unfamiliar plant/disease.",
+                    "prevention": "Please try again with a clearer image, ensuring the affected area is well-lit and in focus.",
+                    "treatment": "N/A"
                 }
             }
         
@@ -129,11 +114,13 @@ async def predict(file: UploadFile = File(...)):
         # Handle cases where the predicted class is not in our JSON file
         if details is None:
             details = {
-                "status": "Disease not detected",
+                # --- IMPROVEMENT: Use consistent keys -- -
+                "name_of_species": "Unknown",
+                "diseased_or_healthy": "Diseased",
                 "disease_name": pred_class.replace("_", " "),
                 "cause": "Information for this specific disease is not yet available in our database.",
+                "prevention": "General advice: Isolate the plant and consult a local agricultural expert.",
                 "treatment": "General advice: Isolate the plant, remove affected leaves, and consult a local agricultural expert for further guidance."
-                
             }
         
         print(f"Predicted: {pred_class} with confidence {confidence:.4f}")
@@ -150,6 +137,6 @@ async def predict(file: UploadFile = File(...)):
 
 
 # --- 5. MAKE THE APP RUNNABLE ---
+# --- BUG FIX 2: Corrected dunder name ---
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
-
