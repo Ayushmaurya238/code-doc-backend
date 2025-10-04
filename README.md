@@ -1,113 +1,244 @@
-Plant Disease Detection API
-This repository contains the backend server for the Crop Doc application, an intelligent plant health monitoring system. The API uses a trained deep learning model to classify plant leaf images, identify diseases, and provide treatment recommendations.
+# Farm-Vision(Crop Doc)
 
-This service is built with FastAPI and uses a fastai model for predictions.
+Mobile-first crop disease detection with a **Next.js frontend** and a **FastAPI backend** powered by a **fastai model** plus a disease knowledge base (`disease_info.json`). Capture or upload a leaf image and get **disease name, cause, prevention, treatment, and confidence**.
 
-Features
-Fast Predictions: Leverages FastAPI for high-performance, asynchronous request handling.
+Supports **Google sign-in** or **guest mode**. History is saved for signed-in users in **Firestore**.
 
-Model Integration: Loads a pre-trained fastai (.pkl) model on startup for efficient inference.
+---
 
-Rich Responses: Provides detailed information about the predicted disease, including cause and treatment, from a supplementary JSON file.
+## 📂 Monorepo layout
 
-Error Handling: Gracefully handles low-confidence predictions and cases where a disease is not in the database.
+```
+plant-health-ai/
+├─ api/                 # FastAPI server (model + JSON metadata)
+│  ├─ main.py
+│  ├─ requirements.txt
+│  ├─ disease_info.json
+│  └─ models/
+│     └─ model.pkl     # exported fastai model (not committed)
+├─ web/                 # Next.js 14 App Router UI
+│  ├─ app/
+│  │  ├─ layout.js
+│  │  ├─ page.js
+│  │  └─ globals.css
+│  ├─ public/
+│  │  └─ favicon.jpeg  # website logo/favicon
+│  ├─ package.json
+│  ├─ next.config.js
+│  ├─ postcss.config.js
+│  ├─ tailwind.config.js
+│  └─ .env.local.example
+└─ research/
+   └─ Plant_disease.ipynb
+```
 
-CORS Enabled: Configured to accept requests from any origin, making frontend integration seamless.
+---
 
-Interactive Docs: Automatically generates API documentation at the /docs endpoint.
+## 🔧 Prerequisites
 
-Tech Stack
-Framework: FastAPI
+* **Node.js 18+** and npm for the frontend.
+* **Python 3.10+** for the backend.
+* A **Firebase project** (Authentication + Firestore).
+* A **fastai exported model (`.pkl`)** placed under `api/models/` and referenced by `MODEL_PATH` in `main.py`.
 
-ML Library: fastai / PyTorch
+---
 
-Server: Uvicorn
+## 🚀 1) Backend: FastAPI server
 
-Language: Python 3.9+
+From the `api/` folder:
 
-Setup and Installation
-Follow these steps to get the backend server running on your local machine.
+### Create venv and install dependencies
 
-1. Prerequisites
-Python 3.9 or newer installed on your system.
+**macOS/Linux**
 
-pip (Python package installer).
+```bash
+python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
+```
 
-2. Clone the Repository
-git clone <your-repository-url>
-cd <your-repository-folder>
+**Windows**
 
-3. Install Dependencies
-It's highly recommended to use a virtual environment to keep dependencies isolated.
+```bash
+py -m venv .venv && .venv\Scripts\activate && pip install -r requirements.txt
+```
 
-# Create a virtual environment (optional but recommended)
-python -m venv venv
-source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+### Model and metadata
 
-# Install required packages
-pip install -r requirements.txt
+* Put your model file under `api/models/` and ensure `MODEL_PATH` in `main.py` points to it.
+* Keep `disease_info.json` in `api/` (already present).
 
-4. Add Required Files
-Place the following files in the root directory of the backend project (the same folder as main.py):
+### Run the server
 
-plant_disease_model_resnet34.pkl: The exported fastai learner model file.
+```bash
+uvicorn main:app --reload --port 8000
+```
 
-disease_info.json: The JSON file containing detailed information about each disease class.
+API available at: **[http://localhost:8000](http://localhost:8000)**
 
-The server will fail to start if these files are not present.
+* **Health endpoint:** `/` (if defined)
+* **Prediction endpoint:** `POST /predict` with file field `"file"`
 
-Running the Server
-Once the setup is complete, you can start the API server with the following command:
+### Test the endpoint
 
-python main.py
+```bash
+curl -X POST -F "file=@sample.jpg" http://localhost:8000/predict
+```
 
-Alternatively, you can use Uvicorn directly, which is great for development as it auto-reloads on code changes:
+**Notes**
 
-uvicorn main:app --reload
+* CORS is enabled for dev in `main.py`. Tighten `allow_origins` in production.
+* If the model cannot be found or loaded, the app will raise on startup.
 
-The server will start on http://localhost:8000.
+---
 
-API Endpoints
-The API provides the following endpoints.
+## 💻 2) Frontend: Next.js app
 
-Root
-Endpoint: /
+From the `web/` folder:
 
-Method: GET
+### Install dependencies
 
-Description: A simple health check endpoint to confirm that the API is running.
+```bash
+npm install
+```
 
-Success Response:
+### Configure environment
 
-{
-  "message": "Welcome to the Plant Disease Prediction API! Go to /docs for more info."
-}
+```bash
+cp .env.local.example .env.local
+```
 
-Predict Disease
-Endpoint: /predict
+Fill in:
 
-Method: POST
+* `NEXT_PUBLIC_FIREBASE_*` with Firebase web config.
+* `NEXT_PUBLIC_API_ENDPOINT=http://localhost:8000/predict` (or your deployed API URL).
 
-Description: The main endpoint that accepts an image of a plant leaf and returns a prediction. The image must be sent as multipart/form-data.
+### Development server
 
-Request Body:
+```bash
+npm run dev
+```
 
-file: The image file (UploadFile).
+App available at: **[http://localhost:3000](http://localhost:3000)**
 
-Success Response (Code 200):
+### Build and start
 
+```bash
+npm run build
+npm start
+```
+
+**Key behaviors**
+
+* Google Sign-In or “Continue as Guest”. Guest mode disables history save.
+* History stored at `users/{uid}/scans` in Firestore.
+* Mobile-first UI supports camera capture + gallery upload.
+
+---
+
+## 🌍 3) Launch (Local + Deployment)
+
+### Local end-to-end
+
+```bash
+# API
+cd api && uvicorn main:app --reload --port 8000
+
+# Web
+cd web && npm run dev
+```
+
+Open **[http://localhost:3000](http://localhost:3000)** (ensure API host is reachable).
+
+### Deployment
+
+**Backend:**
+
+* Render, Fly.io, Railway, Azure App Service, or VM with uvicorn/gunicorn + Nginx.
+* Persist `model.pkl` in container/volume and align `MODEL_PATH`.
+
+**Frontend:**
+
+* Deploy `web/` to Vercel or Netlify.
+* Set `NEXT_PUBLIC_API_ENDPOINT` to deployed API’s HTTPS URL.
+* Add your web host to Firebase authorized domains.
+
+**Security tips**
+
+* Never commit secrets. Use environment variables.
+* Restrict Firestore rules to `users/{uid}/scans`.
+
+---
+
+## 📑 4) API Contract
+
+### `POST /predict`
+
+**Body:** `multipart/form-data` with field `file` (`image/jpeg` or `image/png`)
+
+**Response:**
+
+```json
 {
   "predicted_class": "Tomato___Late_blight",
-  "confidence": "0.9876",
+  "confidence": 0.95,
   "details": {
-    "status": "Diseased",
-    "diseaseName": "Tomato Late Blight",
-    "cause": "Caused by the fungus-like organism Phytophthora infestans.",
-    "treatment": "Apply fungicides containing mancozeb, chlorothalonil, or copper-based compounds."
+    "name_of_species": "Tomato",
+    "diseased_or_healthy": "Diseased",
+    "disease_name": "Late Blight",
+    "cause": "Phytophthora infestans",
+    "prevention": "Use resistant varieties, crop rotation",
+    "treatment": "Apply fungicide"
   }
 }
+```
 
-Error Response (Code 500): If an internal error occurs during prediction.
+Frontend normalizes this into:
+`status`, `diseaseName`, `cause`, `prevention`, `treatment`, and `name_of_species`.
 
-Interactive Documentation
-For easy testing, navigate to http://localhost:8000/docs in your browser after starting the server. This will open the interactive Swagger UI where you can upload an image and test the /predict endpoint directly.
+---
+
+## 🛠 5) Troubleshooting
+
+* **Frontend cannot reach API**
+
+  * Check `NEXT_PUBLIC_API_ENDPOINT`.
+  * Verify CORS in `api/main.py`.
+
+* **All predictions show Diseased**
+
+  * Ensure backend returns `"Healthy"`/`"None"` where applicable.
+
+* **History not saving**
+
+  * Confirm user is signed-in.
+  * Verify Firestore rules + `users/{uid}/scans`.
+
+* **Mobile camera not opening**
+
+  * Use `capture="environment"` input.
+  * On iOS Safari: requires HTTPS + permissions.
+
+---
+
+## 📜 6) Scripts quick ref
+
+**API**
+
+```bash
+cd api && source .venv/bin/activate && uvicorn main:app --reload --port 8000
+```
+
+**Web**
+
+```bash
+cd web && npm install && npm run dev
+```
+
+---
+
+
+## 🙏 Acknowledgements
+
+* **fastai** → model training/inference
+* **FastAPI** → backend serving
+* **Next.js + Tailwind** → frontend (mobile-first)
+* **Firebase** → authentication + Firestore storage
