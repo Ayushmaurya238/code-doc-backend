@@ -1,7 +1,7 @@
-fastapi
-uvicorn
-python-multipart
-fastai
-torch
-torchvision
-# Add any other libraries you use
+fastapi==0.115.2
+uvicorn[standard]==0.30.6
+python-multipart==0.0.9
+pillow==10.4.0
+fastai==2.7.15
+torch>=2.0.0
+numpy>=1.24.0
